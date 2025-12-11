@@ -23,7 +23,54 @@ This lets us treat the M/M/∞ model as a simple Markov chain and find the distr
 
 # Program
 
+NAME:SHARMILA P
+REF NO:25015799
+COLAB LINK:https://colab.research.google.com/drive/1GxZV2gd6Jy7OysGLYP5ras7zFY2jDURG?usp=sharing
+import math 
+ 
+arr_time_input = '' 
+while not arr_time_input.strip(): # Loop until a non-empty input is received 
+    arr_time_input = input("Enter the mean inter arrival time of objects from feeder (in 
+secs):") 
+    if not arr_time_input.strip(): 
+        print("Input cannot be empty. Please enter a value.") 
+ 
+arr_time = float(arr_time_input) 
+ 
+ser_time=float(input("Enter the mean inter service time of lathe machine (in secs):")) 
+Robot_time=float(input("Enter the Additional time taken for the robot (in secs):")) 
+c=int(input("Number of service centres:")) 
+lam=1/arr_time 
+mu=1/(ser_time+Robot_time) 
+print("------------------------------------------------") 
+print("Multiple Server with infinite capacity- (M/M/c):(00/FIFO)") 
+print("----------------------------------------------------") 
+print("The mean arrival rate per second: %0.2f" %lam) 
+print("The mean service rate per second: %0.2f"%mu) 
+rho=lam/(c*mu) 
+sum=(lam/mu)**c*(1/(1-rho))/math.factorial(c) 
+for i in range(0,c): 
+    sum=sum+(lam/mu)**i/math.factorial(i) 
+P0=1/sum 
+if(rho<1): 
+    Lq=(P0/math.factorial(c))*(1/c)*(lam/mu)**(c+1)/(1-rho)**2 
+    Ls=Lq+lam/mu 
+    Ws=Ls/lam 
+    Wq=Lq/lam 
+    print("Average number of objects in the system: %0.2f"%Ls) 
+    print("Average numner of objects in the conveyor: %0.2f"%Lq) 
+    print("Average waiting time of an object in the system: %0.2f secs"%Ws) 
+    print("Average waiting time of an object in the conveyor: %0.2f secs"%Ws) 
+    print("Probability that the system is busy: %0.2f" %(rho)) 
+    print("Probability that the system is empty:%0.2f "%(1-rho)) 
+else: 
+    print("Warning! Objects overflow will happen in the conveyor") 
+print("-----------------------------------------------------")
+
 # Output
+   <img width="883" height="699" alt="Screenshot 2025-12-11 203937" src="https://github.com/user-attachments/assets/1188254c-be7e-4143-96dc-9cb91a03ad81" />
+
+
 
 # Result
        The average number of material in the system and in the conveyor and waiting are  successfully found.
